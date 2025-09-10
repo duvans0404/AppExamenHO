@@ -10,29 +10,31 @@
   </div>
 
   <div class="filters-section">
-    <div class="search-bar">
-      <i class="pi pi-search"></i>
-      <input 
-        pInputText 
-        [(ngModel)]="searchTerm" 
-        (input)="filterGrades()"
-        placeholder="Search grades by name or number...">
-    </div>
-    
-    <div class="filter-controls">
-      <p-button 
-        [label]="showFilters ? 'Hide Filters' : 'Show Filters'" 
-        icon="pi pi-filter" 
-        [text]="true" 
-        (onClick)="showFilters = !showFilters">
-      </p-button>
+    <div class="search-container">
+      <div class="search-bar">
+        <i class="pi pi-search"></i>
+        <input 
+          pInputText 
+          [(ngModel)]="searchTerm" 
+          (input)="filterGrades()"
+          placeholder="Search grades by name or number...">
+      </div>
       
-      <p-button 
-        label="Clear Filters" 
-        icon="pi pi-times" 
-        [text]="true" 
-        (onClick)="clearFilters()">
-      </p-button>
+      <div class="filter-controls">
+        <p-button 
+          [label]="showFilters ? 'Hide Filters' : 'Show Filters'" 
+          icon="pi pi-filter" 
+          [text]="true" 
+          (onClick)="showFilters = !showFilters">
+        </p-button>
+        
+        <p-button 
+          label="Clear Filters" 
+          icon="pi pi-times" 
+          [text]="true" 
+          (onClick)="clearFilters()">
+        </p-button>
+      </div>
     </div>
   </div>
 
