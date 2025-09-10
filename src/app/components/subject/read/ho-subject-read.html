@@ -135,3 +135,139 @@
 
   <p-toast></p-toast>
 </div>
+  <div class="list-header">
+    <h2>Subjects List</h2>
+    <p-button 
+      label="Add New Subject" 
+      icon="pi pi-plus" 
+      routerLink="/subjects/create"
+      [raised]="true">
+    </p-button>
+  </div>
+
+  <div class="filters-section">
+    <div class="search-bar">
+      <i class="pi pi-search"></i>
+      <input 
+        pInputText 
+        [(ngModel)]="searchTerm" 
+        (input)="filterSubjects()"
+        placeholder="Search subjects by name or grade...">
+    </div>
+    
+    <div class="filter-controls">
+      <p-button 
+        [label]="showFilters ? 'Hide Filters' : 'Show Filters'" 
+        icon="pi pi-filter" 
+        [text]="true" 
+        (onClick)="showFilters = !showFilters">
+      </p-button>
+      
+      <p-button 
+        label="Clear Filters" 
+        icon="pi pi-times" 
+        [text]="true" 
+        (onClick)="clearFilters()">
+      </p-button>
+    </div>
+  </div>
+
+  <div class="filters" *ngIf="showFilters">
+    <div class="filter-row">
+      <div class="filter-field">
+        <label>Status</label>
+        <p-select 
+          [(ngModel)]="statusFilter" 
+          (onChange)="filterSubjects()"
+          [options]="[
+            { label: 'All', value: '' },
+            { label: 'Active', value: 'ACTIVE' },
+            { label: 'Inactive', value: 'INACTIVE' }
+          ]" 
+          placeholder="Filter by status">
+        </p-select>
+      </div>
+      
+      <div class="filter-field">
+        <label>Grade</label>
+        <p-select 
+          [(ngModel)]="gradeFilter" 
+          (onChange)="filterSubjects()"
+          [options]="getGradeOptions()" 
+          placeholder="Filter by grade">
+        </p-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <p-table 
+      [value]="filteredSubjects" 
+      [paginator]="true" 
+      [rows]="10" 
+      [showCurrentPageReport]="true" 
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} subjects"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [loading]="false"
+      styleClass="p-datatable-sm">
+      
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Grade</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-subject>
+        <tr>
+          <td>{{ subject.id }}</td>
+          <td>{{ subject.name }}</td>
+          <td>{{ subject.grade }}</td>
+          <td>
+            <span 
+              class="status-badge" 
+              [ngClass]="'status-' + getStatusSeverity(subject.status)">
+              {{ subject.status }}
+            </span>
+          </td>
+          <td>{{ subject.createdAt | date:'short' }}</td>
+          <td>
+            <div class="action-buttons">
+              <p-button 
+                icon="pi pi-pencil" 
+                [text]="true" 
+                [rounded]="true" 
+                pTooltip="Edit Subject"
+                routerLink="/subjects/update/{{subject.id}}">
+              </p-button>
+              <p-button 
+                icon="pi pi-trash" 
+                [text]="true" 
+                [rounded]="true" 
+                pTooltip="Delete Subject"
+                routerLink="/subjects/delete/{{subject.id}}">
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center">
+            <div class="empty-state">
+              <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+              <p>No subjects found</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-toast></p-toast>
+</div>

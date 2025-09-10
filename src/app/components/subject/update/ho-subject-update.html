@@ -80,3 +80,84 @@
 
   <p-toast></p-toast>
 </div>
+  <div class="form-header">
+    <h2>Update Subject</h2>
+    <p-button 
+      label="Back to Subjects" 
+      icon="pi pi-arrow-left" 
+      [text]="true" 
+      (onClick)="cancel()">
+    </p-button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="subject-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="name">Subject Name *</label>
+        <input 
+          pInputText 
+          id="name" 
+          formControlName="name" 
+          placeholder="Enter subject name"
+          [class.ng-invalid]="form.get('name')?.invalid && form.get('name')?.touched">
+        <small 
+          class="error-message" 
+          *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+          Subject name is required and must be at least 2 characters
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="grade">Grade *</label>
+        <p-select 
+          id="grade" 
+          formControlName="grade" 
+          [options]="gradeOptions" 
+          placeholder="Select grade"
+          [class.ng-invalid]="form.get('grade')?.invalid && form.get('grade')?.touched">
+        </p-select>
+        <small 
+          class="error-message" 
+          *ngIf="form.get('grade')?.invalid && form.get('grade')?.touched">
+          Please select a grade
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="status">Status *</label>
+        <p-select 
+          id="status" 
+          formControlName="status" 
+          [options]="statusOptions" 
+          placeholder="Select status"
+          [class.ng-invalid]="form.get('status')?.invalid && form.get('status')?.touched">
+        </p-select>
+        <small 
+          class="error-message" 
+          *ngIf="form.get('status')?.invalid && form.get('status')?.touched">
+          Please select a status
+        </small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <p-button 
+        type="button" 
+        label="Cancel" 
+        icon="pi pi-times" 
+        [text]="true" 
+        (onClick)="cancel()">
+      </p-button>
+      <p-button 
+        type="submit" 
+        label="Update Subject" 
+        icon="pi pi-check" 
+        [disabled]="form.invalid">
+      </p-button>
+    </div>
+  </form>
+
+  <p-toast></p-toast>
+</div>

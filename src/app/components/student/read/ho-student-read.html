@@ -131,3 +131,135 @@
 
   <p-toast></p-toast>
 </div>
+  <div class="list-header">
+    <h2>Students List</h2>
+    <p-button 
+      label="Add New Student" 
+      icon="pi pi-plus" 
+      routerLink="/students/create"
+      [raised]="true">
+    </p-button>
+  </div>
+
+  <div class="filters-section">
+    <div class="search-bar">
+      <i class="pi pi-search"></i>
+      <input 
+        pInputText 
+        [(ngModel)]="searchTerm" 
+        (input)="filterStudents()"
+        placeholder="Search students by name, identification or phone...">
+    </div>
+    
+    <div class="filter-controls">
+      <p-button 
+        [label]="showFilters ? 'Hide Filters' : 'Show Filters'" 
+        icon="pi pi-filter" 
+        [text]="true" 
+        (onClick)="showFilters = !showFilters">
+      </p-button>
+      
+      <p-button 
+        label="Clear Filters" 
+        icon="pi pi-times" 
+        [text]="true" 
+        (onClick)="clearFilters()">
+      </p-button>
+    </div>
+  </div>
+
+  <div class="filters" *ngIf="showFilters">
+    <div class="filter-row">
+      <div class="filter-field">
+        <label>Status</label>
+        <p-select 
+          [(ngModel)]="statusFilter" 
+          (onChange)="filterStudents()"
+          [options]="[
+            { label: 'All', value: '' },
+            { label: 'Active', value: 'ACTIVE' },
+            { label: 'Inactive', value: 'INACTIVE' }
+          ]" 
+          placeholder="Filter by status">
+        </p-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <p-table 
+      [value]="filteredStudents" 
+      [paginator]="true" 
+      [rows]="10" 
+      [showCurrentPageReport]="true" 
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} students"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [loading]="false"
+      styleClass="p-datatable-sm">
+      
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Identification</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Grade</th>
+          <th>Status</th>
+          <th>Birth Date</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>{{ student.id }}</td>
+          <td>{{ student.identification }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.phone }}</td>
+          <td>{{ student.grade }}</td>
+          <td>
+            <span 
+              class="status-badge" 
+              [ngClass]="'status-' + getStatusSeverity(student.status)">
+              {{ student.status }}
+            </span>
+          </td>
+          <td>{{ student.birthDate }}</td>
+          <td>{{ student.createdAt | date:'short' }}</td>
+          <td>
+            <div class="action-buttons">
+              <p-button 
+                icon="pi pi-pencil" 
+                [text]="true" 
+                [rounded]="true" 
+                pTooltip="Edit Student"
+                routerLink="/students/update/{{student.id}}">
+              </p-button>
+              <p-button 
+                icon="pi pi-trash" 
+                [text]="true" 
+                [rounded]="true" 
+                pTooltip="Delete Student"
+                routerLink="/students/delete/{{student.id}}">
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" class="text-center">
+            <div class="empty-state">
+              <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+              <p>No students found</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-toast></p-toast>
+</div>

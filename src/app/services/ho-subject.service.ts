@@ -100,3 +100,4 @@ export class HoSubjectService {
     return this.subjectsSubject.value.find(s => s.id === id);
   }
 }
+

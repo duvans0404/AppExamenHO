@@ -26,3 +26,4 @@ export interface HoStudentUpdate {
   birthDate: string;
   grade: number;
 }
+

@@ -17,3 +17,4 @@ export interface HoSubjectUpdate {
   status: 'ACTIVE' | 'INACTIVE';
   grade: string;
 }
+

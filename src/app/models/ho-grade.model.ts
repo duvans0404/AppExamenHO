@@ -17,3 +17,4 @@ export interface HoGradeUpdate {
   number: number;
   status: 'ACTIVE' | 'INACTIVE';
 }
+
