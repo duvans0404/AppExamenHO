@@ -1,0 +1,81 @@
+<div class="sidebar-container">
+  <!-- Header con logo -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <i class="pi pi-graduation-cap"></i>
+      </div>
+      <div class="logo-text">
+        <h1>Sistema</h1>
+        <p>Gestión Educativa</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú de navegación -->
+  <nav class="sidebar-nav">
+    <!-- Gestión Académica -->
+    <div class="nav-section">
+      <div class="section-title">
+        <span>GESTIÓN ACADÉMICA</span>
+      </div>
+      
+      <div class="nav-links">
+        <a 
+          routerLink="/students" 
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          <div class="nav-link-icon" style="background: #8b5cf6;">
+            <i class="pi pi-users"></i>
+          </div>
+          <div class="nav-link-text">
+            <span class="nav-link-label">Estudiantes</span>
+            <span class="nav-link-badge">{{studentsCount}}</span>
+          </div>
+        </a>
+
+        <a 
+          routerLink="/grades" 
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          <div class="nav-link-icon" style="background: #f97316;">
+            <i class="pi pi-book"></i>
+          </div>
+          <div class="nav-link-text">
+            <span class="nav-link-label">Grados</span>
+            <span class="nav-link-badge">{{gradesCount}}</span>
+          </div>
+        </a>
+
+        <a 
+          routerLink="/subjects" 
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          <div class="nav-link-icon" style="background: #10b981;">
+            <i class="pi pi-cog"></i>
+          </div>
+          <div class="nav-link-text">
+            <span class="nav-link-label">Asignaturas</span>
+            <span class="nav-link-badge">{{subjectsCount}}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar">
+        <i class="pi pi-user"></i>
+      </div>
+      <div class="user-details">
+        <h4>Admin User</h4>
+        <p>Administrador</p>
+      </div>
+    </div>
+  </div>
+</div>

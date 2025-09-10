@@ -1,0 +1,130 @@
+<div class="student-create-container">
+  <div class="form-header">
+    <h2>Create New Student</h2>
+    <p-button 
+      label="Back to Students" 
+      icon="pi pi-arrow-left" 
+      [text]="true" 
+      (onClick)="cancel()">
+    </p-button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="student-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="identification">Identification *</label>
+        <input 
+          pInputText 
+          id="identification" 
+          formControlName="identification" 
+          placeholder="Enter identification number"
+          [class.ng-invalid]="form.get('identification')?.invalid && form.get('identification')?.touched">
+        <small 
+          class="error-message" 
+          *ngIf="form.get('identification')?.invalid && form.get('identification')?.touched">
+          Identification is required and must be at least 6 characters
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="name">Full Name *</label>
+        <input 
+          pInputText 
+          id="name" 
+          formControlName="name" 
+          placeholder="Enter full name"
+          [class.ng-invalid]="form.get('name')?.invalid && form.get('name')?.touched">
+        <small 
+          class="error-message" 
+          *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+          Name is required and must be at least 2 characters
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="phone">Phone *</label>
+        <input 
+          pInputText 
+          id="phone" 
+          formControlName="phone" 
+          placeholder="Enter phone number"
+          [class.ng-invalid]="form.get('phone')?.invalid && form.get('phone')?.touched">
+        <small 
+          class="error-message" 
+          *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched">
+          Phone is required and must be 10 digits
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="birthDate">Birth Date *</label>
+        <input 
+          pInputText 
+          id="birthDate" 
+          formControlName="birthDate" 
+          placeholder="DD/MM/YYYY"
+          [class.ng-invalid]="form.get('birthDate')?.invalid && form.get('birthDate')?.touched">
+        <small 
+          class="error-message" 
+          *ngIf="form.get('birthDate')?.invalid && form.get('birthDate')?.touched">
+          Birth date is required in DD/MM/YYYY format
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="grade">Grade *</label>
+        <p-inputNumber 
+          id="grade" 
+          formControlName="grade" 
+          [min]="1" 
+          [max]="12" 
+          placeholder="Enter grade"
+          [class.ng-invalid]="form.get('grade')?.invalid && form.get('grade')?.touched">
+        </p-inputNumber>
+        <small 
+          class="error-message" 
+          *ngIf="form.get('grade')?.invalid && form.get('grade')?.touched">
+          Grade is required and must be between 1 and 12
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="status">Status *</label>
+        <p-select 
+          id="status" 
+          formControlName="status" 
+          [options]="statusOptions" 
+          placeholder="Select status"
+          [class.ng-invalid]="form.get('status')?.invalid && form.get('status')?.touched">
+        </p-select>
+        <small 
+          class="error-message" 
+          *ngIf="form.get('status')?.invalid && form.get('status')?.touched">
+          Please select a status
+        </small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <p-button 
+        type="button" 
+        label="Cancel" 
+        icon="pi pi-times" 
+        [text]="true" 
+        (onClick)="cancel()">
+      </p-button>
+      <p-button 
+        type="submit" 
+        label="Create Student" 
+        icon="pi pi-check" 
+        [disabled]="form.invalid">
+      </p-button>
+    </div>
+  </form>
+
+  <p-toast></p-toast>
+</div>

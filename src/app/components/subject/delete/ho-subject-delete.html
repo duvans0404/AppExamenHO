@@ -1,0 +1,85 @@
+<div class="subject-delete-container">
+  <div class="delete-header">
+    <h2>Delete Subject</h2>
+    <p-button 
+      label="Back to Subjects" 
+      icon="pi pi-arrow-left" 
+      [text]="true" 
+      (onClick)="cancel()">
+    </p-button>
+  </div>
+
+  <div class="delete-content" *ngIf="subject">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="warning-header">
+          <i class="pi pi-exclamation-triangle warning-icon"></i>
+          <h3>Warning: This action cannot be undone</h3>
+        </div>
+      </ng-template>
+      
+      <div class="subject-info">
+        <h4>Subject Information:</h4>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>ID:</label>
+            <span>{{ subject.id }}</span>
+          </div>
+          <div class="info-item">
+            <label>Name:</label>
+            <span>{{ subject.name }}</span>
+          </div>
+          <div class="info-item">
+            <label>Grade:</label>
+            <span>{{ subject.grade }}</span>
+          </div>
+          <div class="info-item">
+            <label>Status:</label>
+            <span 
+              class="status-badge" 
+              [ngClass]="'status-' + (subject.status === 'ACTIVE' ? 'success' : 'danger')">
+              {{ subject.status }}
+            </span>
+          </div>
+          <div class="info-item">
+            <label>Created At:</label>
+            <span>{{ subject.createdAt | date:'short' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="delete-actions">
+          <p-button 
+            label="Cancel" 
+            icon="pi pi-times" 
+            [text]="true" 
+            (onClick)="cancel()">
+          </p-button>
+          <p-button 
+            label="Delete Subject" 
+            icon="pi pi-trash" 
+            severity="danger"
+            (onClick)="confirmDelete()">
+          </p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <div class="not-found" *ngIf="!subject">
+    <div class="not-found-content">
+      <i class="pi pi-exclamation-circle" style="font-size: 3rem; color: #e74c3c;"></i>
+      <h3>Subject not found</h3>
+      <p>The subject you're looking for doesn't exist or has already been deleted.</p>
+      <p-button 
+        label="Back to Subjects" 
+        icon="pi pi-arrow-left" 
+        (onClick)="cancel()">
+      </p-button>
+    </div>
+  </div>
+
+  <p-confirmDialog></p-confirmDialog>
+  <p-toast></p-toast>
+</div>
